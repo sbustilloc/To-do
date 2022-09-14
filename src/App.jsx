@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import Form from "./components/Form";
 import Header from "./components/Header";
 import ListaTareas from "./components/ListaTareas";
@@ -8,13 +8,14 @@ function App() {
   const [tarea, setTarea] = useState({});
 
   useEffect(() => {
-    const ObtenerTareasLocalStorage = () => {
-      const tareasLocalStorage = JSON.parse(localStorage.getItem("tareas")) ?? [];
-      setTareas(tareasLocalStorage)
+
+    const obtenerTareasLocalStorage = () => {
+      const tareasLocalStorage =
+        JSON.parse(localStorage.getItem("tareas")) ?? [];
+      setTareas(tareasLocalStorage);
     };
 
-    ObtenerTareasLocalStorage();
-    
+    obtenerTareasLocalStorage();
   }, []);
 
   useEffect(() => {
@@ -22,11 +23,10 @@ function App() {
   }, [tareas]);
 
   const eliminarTarea = (id) => {
-    const actualizarTarea = tarea.filter((tarea) => tarea.id !== id);
+    const actualizarTarea = tareas.filter((tarea) => tarea.id !== id);
+
     setTareas(actualizarTarea);
   };
-
-  
 
   return (
     <div className="container mx-auto mt-20">

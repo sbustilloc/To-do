@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import AlertError from "./AlertError";
 
 const Form = ({ tareas, setTareas, tarea, setTarea }) => {
   const [titulo, setTitulo] = useState("");
   const [fecha, setFecha] = useState("");
   const [descripcion, setDescripcion] = useState("");
+
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -13,28 +14,34 @@ const Form = ({ tareas, setTareas, tarea, setTarea }) => {
       setFecha(tarea.fecha);
       setDescripcion(tarea.descripcion);
     }
-  }, [tarea]); /// aqu se leen
+  }, [tarea]);
 
   const generarId = () => {
-    const id = Math.random().toString(20).substring(0, 2);
+    const id = Math.random().toString(20).substr(2);
     return id;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    /*Validacion de formulario */
+    // Validación Formulario
     if ([titulo, fecha, descripcion].includes("")) {
       setError(true);
       return;
     }
+
     setError(false);
 
-    /* Objeto de tareas */
-    const objetoTareas = { titulo, fecha, descripcion };
+    // Objeto de Tareas
+    const objetoTareas = {
+      titulo,
+      fecha,
+      descripcion,
+    };
 
     if (tarea.id) {
-      // Editando la tarea
+      // Editando la Tarea
+
       objetoTareas.id = tarea.id;
       const tareasActualizadas = tareas.map((tareaState) =>
         tareaState.id === tarea.id ? objetoTareas : tareaState
@@ -42,13 +49,14 @@ const Form = ({ tareas, setTareas, tarea, setTarea }) => {
 
       setTareas(tareasActualizadas);
       setTarea({});
+
     } else {
-      // nueva tarea
+      // Nueva Tarea
       objetoTareas.id = generarId();
       setTareas([...tareas, objetoTareas]);
     }
 
-    /// limpiar formulario
+    // Limpiar nuestro Formulario
     setTitulo("");
     setFecha("");
     setDescripcion("");
@@ -117,10 +125,11 @@ const Form = ({ tareas, setTareas, tarea, setTarea }) => {
             onChange={(e) => setDescripcion(e.target.value)}
           />
         </div>
+
         {!tarea.id ? (
           <input
             type="submit"
-            className="bg-blue-600 w-full p-3 text-white uppercase font-bold rounded-md hover:bg-blue-700 transition-colors cursor-pointer mb-4"
+            className="bg-blue-600 w-full p-3 text-white uppercase font-bold rounded-md hover:bg-blue-700 transition-colors cursor-pointer"
             value="Crear Tarea"
           />
         ) : (

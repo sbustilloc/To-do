@@ -1,14 +1,15 @@
 const Tarea = ({tarea, setTarea, eliminarTarea}) => {
 
-  const {titulo, fecha, descripcion, id} = tarea;
+const {titulo, fecha, descripcion, id} = tarea;  
 
   const handleEliminar = () => {
-    const respuesta = confirm('¿Estás seguro de eliminar la tarea? ');
+    const respuesta = confirm(" Estas seguro de eliminar la tarea? 😮");
 
     if(respuesta){
       eliminarTarea(id);
     }
   }
+
 
   return (
     <div className="bg-white shadow-md px-5 py-10 rounded-lg mt-5">

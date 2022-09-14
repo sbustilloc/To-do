@@ -8,6 +8,7 @@ const ListaTareas = ({ tareas, setTarea, eliminarTarea }) => {
           <h2 className="font-black text-3xl text-center mb-10">
             Mis Tareas pendientes
           </h2>
+
           {tareas.map((tarea) => {
             return (
               <Tarea
@@ -16,7 +17,7 @@ const ListaTareas = ({ tareas, setTarea, eliminarTarea }) => {
                 setTarea={setTarea}
                 eliminarTarea={eliminarTarea}
               />
-            )
+            );
           })}
         </>
       ) : (
